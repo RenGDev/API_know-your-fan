@@ -13,55 +13,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Marca {
-  id             Int         @id @default(autoincrement())
-  nome           String      @db.VarChar(30)
-  carros         Carro[]
-  @@map("marcas")
+model Fan {
+  id              Int              @id @default(autoincrement())
+  name            String?
+  cpf             String?
+  address         String?
+  email           String?
+  events          String?
+  products        String?
+  instagram       String?
+  twitter         String?
+  google          String?
+
+  games           Game[]
+  gamingProfiles  GamingProfile[]
 }
 
-model Carro {
-  id             Int          @id @default(autoincrement())
-  modelo         String       @db.VarChar(30)
-  ano            Int          @db.SmallInt
-  preco          Decimal      @db.Decimal(10, 2)
-  km             Int
-  foto           String
-  acessorios     String?
-  combustivel    Combustiveis @default(FLEX)
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt()
-  destaque       Boolean      @default(true)
-  marca          Marca        @relation(fields: [marcaId], references: [id])
-  marcaId        Int
-  fotos          Foto[]
-  @@map("carros")
+model Game {
+  id     Int   @id @default(autoincrement())
+  name   String
+  fanId  Int
+  fan    Fan   @relation(fields: [fanId], references: [id])
 }
 
-model Foto {
-  id             Int          @id @default(autoincrement())
-  descricao      String       @db.VarChar(40)
-  url            String
-  carro          Carro        @relation(fields: [carroId], references: [id])
-  carroId        Int
-  @@map("fotos")
-}
-
-model Cliente {
-  id            String   @db.VarChar(36) @id @default(uuid())
-  nome          String   @db.VarChar(60)
-  email         String   @db.VarChar(40)
-  senha         String   @db.VarChar(60)   // senha deve ser varchar(60)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt  
-  @@map("clientes")
-}
-
-enum Combustiveis {
-  FLEX
-  GASOLINA
-  ETANOL
-  DIESEL
-  ELETRICO
-  HIBRIDO
+model GamingProfile {
+  id     Int    @id @default(autoincrement())
+  link   String
+  platform String? 
+  fan     Fan    @relation(fields: [fanId], references: [id], onDelete: Cascade)
+  fanId   Int
 }

@@ -1,9 +1,7 @@
 import express from 'express'
 import cors from 'cors'
-import routesCarros from './routes/carros'
-import routesFotos from './routes/fotos'
-import routesClientes from './routes/clientes'
-import routesLogin from './routes/login'
+import routesFans from './routes/fan'
+
 
 const app = express()
 const port = 3001
@@ -11,13 +9,11 @@ const port = 3001
 app.use(express.json())
 app.use(cors())
 
-app.use("/carros", routesCarros)
-app.use("/fotos", routesFotos)
-app.use("/clientes", routesClientes)
-app.use("/clientes/login", routesLogin)
+app.use("/fan", routesFans)
+
 
 app.get('/', (req, res) => {
-  res.send('API: Revenda de Veículos')
+  res.send('API: know-your-fan')
 })
 
 app.listen(port, () => {
