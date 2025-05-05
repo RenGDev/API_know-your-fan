@@ -1,4 +1,4 @@
-# 🧠 FanProfile Frontend
+# 🧠 FanProfile BackEnd
 
 Este projeto é a API do sistema **FanProfile**, responsável por receber, armazenar e validar os dados de fãs do universo dos e-sports. Ele atua em conjunto com o frontend, oferecendo endpoints para o cadastro de usuários, verificação de identidade e vinculação de perfis sociais.
 
